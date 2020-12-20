@@ -36,7 +36,8 @@ app.get('/', (req, res) => {
 client.connect(err => {
     console.log("connected to db")
     const movieCollection = client.db(process.env.DB_NAME).collection("cinemas");
-
+    const bookingCollection = client.db(process.env.DB_NAME).collection("bookings");
+    const usersBookingCollection = client.db(process.env.DB_NAME).collection("userBookings");
     // Event add post request
     app.post('/addActivity', (req, res) => {
         const activity = req.body
@@ -53,8 +54,8 @@ client.connect(err => {
 
     // Send all event data
 
-    app.get('/getEvents/:email', (req, res) => {
-        activityCollection.find({ email: req.params.email })
+    app.get('/getUserBooking/:email', (req, res) => {
+        usersBookingCollection.find({ email: req.params.email })
             .toArray((err, documents) => {
                 res.send(documents);
             })
@@ -67,18 +68,40 @@ client.connect(err => {
             })
     })
 
-
-
-
-    app.delete("/event/:id", (req, res) => {
-        console.log("id:", req.params.id)
-
-        activityCollection.deleteOne({ _id: ObjectId(req.params.id) })
-            .then((result) => {
-                console.log(result);
-                res.send(result.deletedCount > 0)
+    app.get('/getAllBooking', (req, res) => {
+        bookingCollection.find({})
+            .toArray((err, documents) => {
+                res.send(documents);
             })
     })
+
+    app.get('/booking', (req, res) => {
+        const { bookingDay, bookingTime, movieId, bookedBy } = req.query;
+        bookingCollection.find(
+            {
+                bookingDay: bookingDay,
+                bookingTime: bookingTime,
+                movieId: movieId,
+                bookedBy: bookedBy
+            }
+        )
+            .toArray((err, documents) => {
+                res.send(documents);
+            })
+    })
+
+
+
+
+    // app.delete("/booking", (req, res) => {
+    //     console.log("id:", req.params.id)
+
+    //     activityCollection.deleteOne({ _id: ObjectId(req.params.id) })
+    //         .then((result) => {
+    //             console.log(result);
+    //             res.send(result.deletedCount > 0)
+    //         })
+    // })
 
 
 

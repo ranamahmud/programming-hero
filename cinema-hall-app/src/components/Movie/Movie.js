@@ -5,7 +5,7 @@ import 'react-day-picker/lib/style.css';
 import { Link } from 'react-router-dom';
 const Movie = ({ movie }) => {
     const [selectedDay, setSelectedDay] = useState();
-    const [selectedTime, setSelectedTime] = useState("9am");
+    const [selectedTime, setSelectedTime] = useState("09:00AM");
     // const [booking, setBooking] = ({
     //     date: selectedDay,
     //     time: selectedTime
@@ -46,7 +46,7 @@ const Movie = ({ movie }) => {
                     />
                     <p>Show Time:</p>
                     <select className="custom-select" id="inputGroupSelect01"
-                        defaultValue="9am"
+                        defaultValue="09:00AM"
                         // style={{
                         //     color: colors[service.status]
                         // }}
@@ -54,16 +54,16 @@ const Movie = ({ movie }) => {
                     // id={service._id}
                     // key={service._id}
                     >
-                        <option value="9am"
+                        <option value="09:00AM"
                         // style={{ color: colors['Done'] }}
                         >09:00AM</option>
-                        <option value="12pm"
+                        <option value="12:00PM"
                         // style={{ color: colors['On Going'] }}
                         >12:00PM</option>
-                        <option value="3pm"
+                        <option value="03:00PM"
                         // style={{ color: colors['Pending'] }}
                         >03:00PM</option>
-                        <option value="6pm">
+                        <option value="06:00PM">
                             06:00PM
                         </option>
                     </select>
@@ -73,7 +73,8 @@ const Movie = ({ movie }) => {
                             pathname: "/book-show/" + movie._id,
                             state: {
                                 selectedDay: selectedDay,
-                                selectedTime: selectedTime
+                                selectedTime: selectedTime,
+                                name: movie.name
                             }
                         }}
                     >
