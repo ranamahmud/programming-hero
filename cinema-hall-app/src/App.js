@@ -25,11 +25,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
-          <Route path="/book-show/:key" component={BookShow} />
-          {/* <PrivateRoute path="/create-account/:key" component={CreateAccount} />
-          <PrivateRoute path="/event-tasks" component={EventTasks} />
-          <Route path="/admin-view-event" component={Admin} />
-          <Route path="/admin-ad-event" component={AddAdmin} /> */}
+          <PrivateRoute path="/book-show/:key" component={BookShow} />
         </Switch>
       </Router>
     </UserContext.Provider>

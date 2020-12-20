@@ -80,7 +80,7 @@ const Movie = ({ movie }) => {
                                 name: movie.name,
                                 movieId: movie._id,
 
-                                bookedBy: loggedInUser.bookedBy && loggedInUser.bookedBy
+                                bookedBy: loggedInUser !== null ? loggedInUser.bookedBy : ""
                             }
                         }}
                     >

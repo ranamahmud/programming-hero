@@ -13,40 +13,33 @@ const BookShow = (props) => {
         state;
     const [bookings, setBookings] = useState();
     let day = new Date(selectedDay).toISOString().split("T")[0];
-
     useEffect(() => {
-        const url = `http://localhost:5000/getBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}`
-        // const url = `http://localhost:5000/getBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}&bookedBy=${bookedBy}`
-
+        const url = `http://localhost:5000/getUserBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}&bookedBy=${bookedBy}`
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                // if (data.length === 0) {
-                //     console.log("yes");
-                // } else {
-                //     console.log(data);
+                setCount(data.length);
+            })
+    }, [])
 
-                // }
-                console.log(data);
+    useEffect(() => {
+        const url = `http://localhost:5000/getBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+
 
                 let seatsData = {}
                 for (const item of data) {
-                    console.log(item);
                     seatsData[item.seat] = item.color;
                 }
-                // data.map(booking => ({
-                //     seat: booking.seat,
-                //     color: "red"
-
-                // }));
                 setSeats(seatsData);
-
-                console.log(seatsData);
                 setBookings(data)
             })
     }, [name, selectedDay, selectedTime, movieId, bookedBy])
 
     const handleClick = function (seat) {
+        console.log(count)
         setCount(count + 1)
         var color;
         if (count < 10) {
