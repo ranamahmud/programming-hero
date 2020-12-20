@@ -37,11 +37,20 @@ client.connect(err => {
     console.log("connected to db")
     const movieCollection = client.db(process.env.DB_NAME).collection("cinemas");
     const bookingCollection = client.db(process.env.DB_NAME).collection("bookings");
-    // const usersBookingCollection = client.db(process.env.DB_NAME).collection("userBookings");
     // Event add post request
-    app.post('/addActivity', (req, res) => {
-        const activity = req.body
-        activityCollection.insertOne(activity)
+    app.post('/addBooking', (req, res) => {
+        console.log(req.query)
+        const { selectedDay, selectedTime, movieId, bookedBy, seat, color } = req.query;
+        const booking = {
+            selectedDay, selectedTime,
+
+            "movieId": movieId,
+            "bookedBy": bookedBy,
+            "seat": seat,
+            "color": color
+        };
+        console.log(booking)
+        bookingCollection.insertOne(booking)
             .then(result => {
                 if (result.insertedCount > 0) {
                     res.sendStatus(200)
@@ -52,15 +61,7 @@ client.connect(err => {
 
     })
 
-    // Send all event data
-
-    app.get('/getUserBooking/:email', (req, res) => {
-        usersBookingCollection.find({ email: req.params.email })
-            .toArray((err, documents) => {
-                res.send(documents);
-            })
-    })
-
+    // get movies from database
     app.get('/getAllMovies', (req, res) => {
         movieCollection.find({})
             .toArray((err, documents) => {
@@ -68,17 +69,9 @@ client.connect(err => {
             })
     })
 
-    app.get('/getAllBooking', (req, res) => {
-        bookingCollection.find({})
-            .toArray((err, documents) => {
-                res.send(documents);
-            })
-    })
-
+    // get booking from database
     app.get('/getBooking', (req, res) => {
-        console.log({ req })
         const { selectedDay, selectedTime, movieId, bookedBy } = req.query;
-        console.log({ selectedTime })
         bookingCollection.find(
             {
                 selectedDay: selectedDay,
@@ -88,24 +81,9 @@ client.connect(err => {
             }
         )
             .toArray((err, documents) => {
-                // console.log({ document })
                 res.send(documents);
             })
     })
-
-
-
-
-    // app.delete("/booking", (req, res) => {
-    //     console.log("id:", req.params.id)
-
-    //     activityCollection.deleteOne({ _id: ObjectId(req.params.id) })
-    //         .then((result) => {
-    //             console.log(result);
-    //             res.send(result.deletedCount > 0)
-    //         })
-    // })
-
 
 
 });
