@@ -14,7 +14,7 @@ const BookShow = (props) => {
     const [bookings, setBookings] = useState();
     let day = new Date(selectedDay).toISOString().split("T")[0];
     useEffect(() => {
-        const url = `https://cinema-hall-s.herokuapp.com//getUserBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}&bookedBy=${bookedBy}`
+        const url = `http://localhost:5000/getUserBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}&bookedBy=${bookedBy}`
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -23,7 +23,7 @@ const BookShow = (props) => {
     }, [])
 
     useEffect(() => {
-        const url = `https://cinema-hall-s.herokuapp.com//getBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}`
+        const url = `http://localhost:5000/getBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}`
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -58,7 +58,7 @@ const BookShow = (props) => {
                 ...seatSelected
             })
 
-            const postUrl = `https://cinema-hall-s.herokuapp.com//addBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}&bookedBy=${bookedBy}&seat=${seat}&color=${color} `
+            const postUrl = `https://cinema-hall-s.herokuapp.com/addBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}&bookedBy=${bookedBy}&seat=${seat}&color=${color} `
             fetch(postUrl, {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },

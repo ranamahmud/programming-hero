@@ -11,7 +11,7 @@ const Movies = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     useEffect(() => {
-        fetch('https://cinema-hall-s.herokuapp.com/getAllMovies')
+        fetch('http://localhost:5000/getAllMovies')
             .then(res => res.json())
             .then(data => setEvents(data));
     }, [])
