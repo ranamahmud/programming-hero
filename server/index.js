@@ -1,6 +1,5 @@
 const express = require('express')
 const MongoClient = require('mongodb').MongoClient;
-const { ObjectId } = require('mongodb');
 const bodyParser = require('body-parser')
 const cors = require('cors')
 require('dotenv').config()
@@ -27,19 +26,12 @@ app.use(urlencodedParser)
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-
-
-app.get('/', (req, res) => {
-    res.send("Hello Working db")
-})
-
 client.connect(err => {
     console.log("connected to db")
     const movieCollection = client.db(process.env.DB_NAME).collection("cinemas");
     const bookingCollection = client.db(process.env.DB_NAME).collection("bookings");
     // Event add post request
     app.post('/addBooking', (req, res) => {
-        console.log(req.query)
         const { selectedDay, selectedTime, movieId, bookedBy, seat, color } = req.query;
         const booking = {
             selectedDay, selectedTime,
@@ -49,7 +41,6 @@ client.connect(err => {
             "seat": seat,
             "color": color
         };
-        console.log(booking)
         bookingCollection.insertOne(booking)
             .then(result => {
                 if (result.insertedCount > 0) {
@@ -78,6 +69,22 @@ client.connect(err => {
                 selectedTime: selectedTime,
                 movieId: movieId,
                 // bookedBy: bookedBy
+            }
+        )
+            .toArray((err, documents) => {
+                res.send(documents);
+            })
+    })
+
+    // get booking from database
+    app.get('/getUserBooking', (req, res) => {
+        const { selectedDay, selectedTime, movieId, bookedBy } = req.query;
+        bookingCollection.find(
+            {
+                selectedDay: selectedDay,
+                selectedTime: selectedTime,
+                movieId: movieId,
+                bookedBy: bookedBy
             }
         )
             .toArray((err, documents) => {
