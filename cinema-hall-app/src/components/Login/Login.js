@@ -57,7 +57,7 @@ const Login = () => {
 
         <Container>
             <Row id="login-logo">
-                <Image src={require("../../logos/google.png")} />
+                <Image src={require("../../logos/google.png").default} />
             </Row>
             <Row id="login-form">
                 <Form >

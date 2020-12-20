@@ -1,11 +1,12 @@
 import React from 'react';
+import Movies from '../Movies/Movies';
 import Header from './Header/Header';
 
 const Home = () => {
     return (
         <div>
             <Header />
-            <h1>Home</h1>
+            <Movies />
         </div>
     );
 };

@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 
 client.connect(err => {
     console.log("connected to db")
-    const activityCollection = client.db(process.env.DB_NAME).collection("activities");
+    const movieCollection = client.db(process.env.DB_NAME).collection("cinemas");
 
     // Event add post request
     app.post('/addActivity', (req, res) => {
@@ -60,8 +60,8 @@ client.connect(err => {
             })
     })
 
-    app.get('/getAllEvents', (req, res) => {
-        activityCollection.find({})
+    app.get('/getAllMovies', (req, res) => {
+        movieCollection.find({})
             .toArray((err, documents) => {
                 res.send(documents);
             })
