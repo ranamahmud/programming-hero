@@ -5,6 +5,7 @@ import Header from '../Home/Header/Header';
 const BookShow = (props) => {
     const columns = ["A", "B", "C", "D", "E"];
     const rows = [1, 2, 3, 4, 5, 6, 7, 8];
+    console.log(props.location.state);
     return (
         <div>
             <Header />

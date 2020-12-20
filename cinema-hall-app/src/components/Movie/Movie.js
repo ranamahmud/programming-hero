@@ -4,13 +4,20 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import { Link } from 'react-router-dom';
 const Movie = ({ movie }) => {
-    const [selectedDay, setselectedDay] = useState();
-
+    const [selectedDay, setSelectedDay] = useState();
+    const [selectedTime, setSelectedTime] = useState("9am");
+    // const [booking, setBooking] = ({
+    //     date: selectedDay,
+    //     time: selectedTime
+    // });
     const handleDayClick = function (day) {
-        setselectedDay(day);
+        setSelectedDay(day);
         console.log(selectedDay)
     }
-
+    const handleChange = (e) => {
+        const time = e.target.value;
+        setSelectedTime(time)
+    };
     return (
         <div className="col-md-6" id="event" id={movie._id}>
             <div className="row">
@@ -39,11 +46,11 @@ const Movie = ({ movie }) => {
                     />
                     <p>Show Time:</p>
                     <select className="custom-select" id="inputGroupSelect01"
-                    // defaultValue={service.status}
-                    // style={{
-                    //     color: colors[service.status]
-                    // }}
-                    // onChange={handleChange}
+                        defaultValue="9am"
+                        // style={{
+                        //     color: colors[service.status]
+                        // }}
+                        onChange={handleChange}
                     // id={service._id}
                     // key={service._id}
                     >
@@ -60,12 +67,23 @@ const Movie = ({ movie }) => {
                             06:00PM
                         </option>
                     </select>
-                    <Link to={"/book-show/" + movie._id}>
+                    <Link
+
+                        to={{
+                            pathname: "/book-show/" + movie._id,
+                            state: {
+                                selectedDay: selectedDay,
+                                selectedTime: selectedTime
+                            }
+                        }}
+                    >
                         <Button
                             style={{
                                 marginTop: "10px",
                                 marginLeft: "10px"
                             }}
+
+                            disabled={!(selectedDay && selectedTime)}
                         >Select Seat</Button>
                     </Link>
                 </div>
