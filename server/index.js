@@ -84,7 +84,7 @@ client.connect(err => {
                 selectedDay: selectedDay,
                 selectedTime: selectedTime,
                 movieId: movieId,
-                bookedBy: bookedBy
+                // bookedBy: bookedBy
             }
         )
             .toArray((err, documents) => {

@@ -6,16 +6,18 @@ import Header from '../Home/Header/Header';
 const BookShow = (props) => {
     const columns = ["A", "B", "C", "D", "E"];
     const rows = [1, 2, 3, 4, 5, 6, 7, 8];
-
+    const [seats, setSeats] = useState();
     const { name, selectedDay, selectedTime, movieId, bookedBy } = props.location.
         state;
     const [bookings, setBookings] = useState();
     useEffect(() => {
         let day = new Date(selectedDay).toISOString().split("T")[0];
         console.log({ day });
-        const url = `http://localhost:5000/getBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}&bookedBy=${bookedBy}`
+        const url = `http://localhost:5000/getBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}`
+        // const url = `http://localhost:5000/getBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}&bookedBy=${bookedBy}`
         // console.log(url);
         // console.log({ name, selectedDay, selectedTime, movieId, bookedBy });
+        console.log({ url });
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -25,6 +27,21 @@ const BookShow = (props) => {
                 //     console.log(data);
 
                 // }
+                console.log(data);
+
+                let seatsData = {}
+                for (const item of data) {
+                    console.log(item);
+                    seatsData[item.seat] = item.color;
+                }
+                // data.map(booking => ({
+                //     seat: booking.seat,
+                //     color: "red"
+
+                // }));
+                setSeats(seatsData);
+
+                console.log(seatsData);
                 setBookings(data)
             })
     }, [name, selectedDay, selectedTime, movieId, bookedBy])
@@ -43,16 +60,18 @@ const BookShow = (props) => {
                 <div>
                     {
                         columns.map(col =>
-                            <Row>{
+                            <Row key={col}>{
                                 rows.map(row =>
 
-                                    <Col>
+                                    <Col key={col + row}>
                                         <Button
                                             style={{
-                                                margin: "5px"
+                                                margin: "5px",
+                                                backgroundColor: seats && seats[col + row] !== "" ? seats[col + row] : ""
                                             }}
                                         >
-                                            <p>Seat: {col}{row}</p>
+                                            <p>Seat: {col + row}</p>
+
                                             <Image src={require("../../images/ticket-alt-solid.png").default} fluid size="32" /></Button>
                                     </Col>
                                 )
@@ -61,7 +80,7 @@ const BookShow = (props) => {
                     }
                 </div>
             </Container>
-        </div>
+        </div >
     );
 };
 

@@ -78,7 +78,8 @@ const Movie = ({ movie }) => {
                                 selectedDay: selectedDay,
                                 selectedTime: selectedTime,
                                 name: movie.name,
-                                nameId: movie._id,
+                                movieId: movie._id,
+
                                 bookedBy: loggedInUser.bookedBy && loggedInUser.bookedBy
                             }
                         }}
