@@ -28,7 +28,8 @@ const Login = () => {
         const googleProvider = new firebase.auth.GoogleAuthProvider();
         return firebase.auth().signInWithPopup(googleProvider)
             .then(res => {
-                const { displayName, photoURL, email } = res.user;
+                const { displayName, photoURL, email, uid } = res.user;
+                console.log({ res })
                 const signedInUser = {
                     isSignedIn: true,
                     userName: displayName,
@@ -36,6 +37,7 @@ const Login = () => {
                     photo: photoURL,
                     success: true,
                     registrationDate: new Date(),
+                    bookedBy: uid
                 };
 
                 setLoggedInUser(signedInUser);

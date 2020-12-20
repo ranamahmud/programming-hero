@@ -37,7 +37,7 @@ client.connect(err => {
     console.log("connected to db")
     const movieCollection = client.db(process.env.DB_NAME).collection("cinemas");
     const bookingCollection = client.db(process.env.DB_NAME).collection("bookings");
-    const usersBookingCollection = client.db(process.env.DB_NAME).collection("userBookings");
+    // const usersBookingCollection = client.db(process.env.DB_NAME).collection("userBookings");
     // Event add post request
     app.post('/addActivity', (req, res) => {
         const activity = req.body
@@ -75,17 +75,20 @@ client.connect(err => {
             })
     })
 
-    app.get('/booking', (req, res) => {
-        const { bookingDay, bookingTime, movieId, bookedBy } = req.query;
+    app.get('/getBooking', (req, res) => {
+        console.log({ req })
+        const { selectedDay, selectedTime, movieId, bookedBy } = req.query;
+        console.log({ selectedTime })
         bookingCollection.find(
             {
-                bookingDay: bookingDay,
-                bookingTime: bookingTime,
+                selectedDay: selectedDay,
+                selectedTime: selectedTime,
                 movieId: movieId,
                 bookedBy: bookedBy
             }
         )
             .toArray((err, documents) => {
+                // console.log({ document })
                 res.send(documents);
             })
     })

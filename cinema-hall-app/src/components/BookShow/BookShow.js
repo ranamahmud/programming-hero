@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import Header from '../Home/Header/Header';
 
 const BookShow = (props) => {
     const columns = ["A", "B", "C", "D", "E"];
     const rows = [1, 2, 3, 4, 5, 6, 7, 8];
-    console.log(props.location.state);
-    const { name, selectedDay, selectedTime } = props.location.
-        state;
 
+    const { name, selectedDay, selectedTime, movieId, bookedBy } = props.location.
+        state;
+    const [bookings, setBookings] = useState();
+    useEffect(() => {
+        let day = new Date(selectedDay).toISOString().split("T")[0];
+        console.log({ day });
+        const url = `http://localhost:5000/getBooking?selectedDay=${day}&selectedTime=${selectedTime}&movieId=${movieId}&bookedBy=${bookedBy}`
+        // console.log(url);
+        // console.log({ name, selectedDay, selectedTime, movieId, bookedBy });
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                // if (data.length === 0) {
+                //     console.log("yes");
+                // } else {
+                //     console.log(data);
+
+                // }
+                setBookings(data)
+            })
+    }, [name, selectedDay, selectedTime, movieId, bookedBy])
     return (
         <div>
             <Header />

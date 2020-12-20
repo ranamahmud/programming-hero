@@ -14,7 +14,7 @@ const Movies = () => {
         fetch('http://localhost:5000/getAllMovies')
             .then(res => res.json())
             .then(data => setEvents(data));
-    }, [loggedInUser.email])
+    }, [])
 
     return (
         <Container>

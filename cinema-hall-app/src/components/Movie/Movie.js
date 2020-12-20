@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../App';
 const Movie = ({ movie }) => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
     const [selectedDay, setSelectedDay] = useState();
     const [selectedTime, setSelectedTime] = useState("09:00AM");
     // const [booking, setBooking] = ({
@@ -12,7 +15,7 @@ const Movie = ({ movie }) => {
     // });
     const handleDayClick = function (day) {
         setSelectedDay(day);
-        console.log(selectedDay)
+        // console.log(selectedDay)
     }
     const handleChange = (e) => {
         const time = e.target.value;
@@ -74,7 +77,9 @@ const Movie = ({ movie }) => {
                             state: {
                                 selectedDay: selectedDay,
                                 selectedTime: selectedTime,
-                                name: movie.name
+                                name: movie.name,
+                                nameId: movie._id,
+                                bookedBy: loggedInUser.bookedBy && loggedInUser.bookedBy
                             }
                         }}
                     >
