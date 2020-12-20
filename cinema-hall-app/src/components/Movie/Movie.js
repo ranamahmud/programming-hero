@@ -18,21 +18,20 @@ const Movie = ({ movie }) => {
                     <h1>{movie.name}</h1>
                     <p>{movie.activityDate}</p>
                     {/* <button onClick={(e) => cancelEvent(e, movie._id)}>Cancel</button> */}
-                    <div>
-                        <DayPicker
-                            canChangeMonth={false}
-                            initialMonth={new Date(movie.startDate)}
-                            disabledDays={[
+                    <h5 className="text-center">Select Show Date</h5>
+                    <DayPicker
+                        canChangeMonth={false}
+                        initialMonth={new Date(movie.startDate)}
+                        disabledDays={[
 
-                                {
-                                    after: new Date(movie.endDate),
-                                    before: new Date(movie.startDate),
-                                },
-                            ]}
-                            onDayClick={handleDayClick}
-                            selectedDays={selectedDay}
-                        />
-                    </div>
+                            {
+                                after: new Date(movie.endDate),
+                                before: new Date(movie.startDate),
+                            },
+                        ]}
+                        onDayClick={handleDayClick}
+                        selectedDays={selectedDay}
+                    />
 
                 </div>
             </div>

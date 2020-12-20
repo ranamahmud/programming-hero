@@ -12,6 +12,7 @@ import { createContext, useState } from 'react';
 import Home from './components/Home/Home';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import Login from './components/Login/Login';
+import BookShow from './components/BookShow/BookShow';
 export const UserContext = createContext();
 
 function App() {
@@ -20,9 +21,11 @@ function App() {
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
+
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
+          <Route path="/book-show/:key" component={BookShow} />
           {/* <PrivateRoute path="/create-account/:key" component={CreateAccount} />
           <PrivateRoute path="/event-tasks" component={EventTasks} />
           <Route path="/admin-view-event" component={Admin} />
