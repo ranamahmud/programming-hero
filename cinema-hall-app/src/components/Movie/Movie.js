@@ -9,13 +9,8 @@ const Movie = ({ movie }) => {
 
     const [selectedDay, setSelectedDay] = useState();
     const [selectedTime, setSelectedTime] = useState("09:00AM");
-    // const [booking, setBooking] = ({
-    //     date: selectedDay,
-    //     time: selectedTime
-    // });
     const handleDayClick = function (day) {
         setSelectedDay(day);
-        // console.log(selectedDay)
     }
     const handleChange = (e) => {
         const time = e.target.value;
@@ -32,7 +27,6 @@ const Movie = ({ movie }) => {
                 <div className="col-md-4">
 
                     <p>{movie.activityDate}</p>
-                    {/* <button onClick={(e) => cancelEvent(e, movie._id)}>Cancel</button> */}
                     <h5 className="text-center">Select Show Date</h5>
                     <DayPicker
                         canChangeMonth={false}
@@ -50,21 +44,14 @@ const Movie = ({ movie }) => {
                     <p>Show Time:</p>
                     <select className="custom-select" id="inputGroupSelect01"
                         defaultValue="09:00AM"
-                        // style={{
-                        //     color: colors[service.status]
-                        // }}
                         onChange={handleChange}
-                    // id={service._id}
-                    // key={service._id}
+
                     >
                         <option value="09:00AM"
-                        // style={{ color: colors['Done'] }}
                         >09:00AM</option>
                         <option value="12:00PM"
-                        // style={{ color: colors['On Going'] }}
                         >12:00PM</option>
                         <option value="03:00PM"
-                        // style={{ color: colors['Pending'] }}
                         >03:00PM</option>
                         <option value="06:00PM">
                             06:00PM

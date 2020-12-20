@@ -33,9 +33,8 @@ const Header = () => {
                 </Link>
                 <Nav className="ml-auto">
                     <Link className="navbar-brand" to="/">Home</Link>
-                    <Link className="navbar-brand" to="#features">Destination</Link>
-                    <Link className="navbar-brand" to="/event-tasks">Events</Link>
-                    <Link className="navbar-brand" to="#pricing">Blog</Link>
+
+
 
 
                     {

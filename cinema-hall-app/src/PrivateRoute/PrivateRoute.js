@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: Child, ...rest }) => {
         <Route
             {...rest}
             render={props =>
-                loggedInUser.email ? (
+                loggedInUser && loggedInUser.email ? (
                     <Child {...props} />
                 ) : (
                         <Redirect

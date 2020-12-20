@@ -64,13 +64,6 @@ const BookShow = (props) => {
                 headers: { 'content-type': 'application/json' },
 
             })
-            // .then(res => res.json())
-            // .then(
-            //     data => {
-            //         console.log(data)
-            //     }
-            // )
-            // .then(data => setIsAdmin(data));
         } else {
             alert("you can't book more than 10 seats")
         }
@@ -87,6 +80,10 @@ const BookShow = (props) => {
                         <h3>Date: {day}</h3>
                         <h3>Time: {selectedTime}</h3>
                     </Col>
+                    <h1>{bookings && bookings.length == 40 &&
+
+                        <p p > House is full</p>
+                    }</h1>
                 </Row>
                 <div>
                     {

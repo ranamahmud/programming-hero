@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Button, Container, Form, Image, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Image, Row } from 'react-bootstrap';
 import './Login.css'
 import firebase from 'firebase/app'
 import "firebase/auth";
 import firebaseConfig from '../../firebaseConfig';
 import { UserContext } from '../../App';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 
 export const initializeLoginFramework = () => {
     if (firebase.apps.length === 0) {
@@ -59,20 +59,24 @@ const Login = () => {
 
         <Container>
             <Row id="login-logo">
-                <Image src={require("../../logos/google.png").default} />
+                <Col className="text-center">
+                    <Link to="/">
+                        <Image src={require("../../logos/film-solid.png").default} />
+                    </Link>
+                </Col>
             </Row>
             <Row id="login-form">
                 <Form >
 
                     <div id="login-form-item">
                         <p>
-                            Login with
+                            Login with or Sign Up With Google
     </p>
                         <button variant="light" type="button" onClick={googleSignIn}>
-                            <img src={require("../../logos/google.png")} alt="" />
-                            Continue with Google
+                            <img src={require("../../logos/google.png").default} alt="" />
+                            Login/Sign Up with Google
   </button>
-                        <h1>Don’t have an account? Create an account</h1>
+
                     </div>
                 </Form>
             </Row>
