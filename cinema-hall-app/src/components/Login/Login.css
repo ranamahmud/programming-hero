@@ -1,0 +1,87 @@
+#login-logo {
+    padding-top: 44px;
+}
+
+#login-logo img {
+    /* position: absolute; */
+    width: 202.81px;
+    height: 60px;
+    left: 575px;
+
+    margin: 0 auto;
+}
+
+#login-form {
+    padding-top: 104px;
+}
+
+#login-form form {
+    /* position: absolute; */
+    width: 570px;
+    height: 457px;
+    padding-top: 154px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border: 1px solid #ABABAB;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+
+}
+
+
+#login-form-item {
+    width: 457px;
+    height: 148px;
+    margin-left: 56px;
+}
+
+#login-form-item p {
+    height: 29px;
+    left: 45%;
+    right: 45.28%;
+    top: 325px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #000000;
+
+}
+
+#login-form button {
+    width: 457px;
+    height: 51px;
+    left: 491px;
+    margin-top: 32px;
+
+    background: #FFFFFF;
+    border: 1px solid #C7C7C7;
+    box-sizing: border-box;
+    border-radius: 57px;
+}
+
+#login-form h1 {
+    height: 21px;
+    left: 37.43%;
+    right: 37.36%;
+    margin-top: 15px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: #000000;
+}
+
+#login-form img {
+    /* position: absolute; */
+    width: 31px;
+    height: 31.74px;
+    top: 396px;
+}
