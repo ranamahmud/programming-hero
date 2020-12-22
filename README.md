@@ -24,3 +24,5 @@ Frontend: React JS
 Backend: Express JS 
 
 Database: MongoDB
+
+Result: Failed in Interview. 22-12-2020
